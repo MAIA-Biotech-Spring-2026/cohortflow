@@ -7,7 +7,6 @@ import {
 import {
   DEMO_APPLICANTS,
   DEMO_APPLICATIONS,
-  DEMO_PROGRAMS,
   getApplicantByUserId,
   getApplicationsByApplicant,
   getProgramById,

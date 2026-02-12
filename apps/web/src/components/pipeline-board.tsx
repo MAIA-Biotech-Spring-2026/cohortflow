@@ -23,7 +23,7 @@ interface PipelineBoardProps {
   onMoveApplication?: (applicationId: string, newStatus: ApplicationStatus) => void;
 }
 
-export function PipelineBoard({ stages, onMoveApplication }: PipelineBoardProps) {
+export function PipelineBoard({ stages }: PipelineBoardProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {stages.map((stage) => (
@@ -44,7 +44,6 @@ export function PipelineBoard({ stages, onMoveApplication }: PipelineBoardProps)
                 <ApplicationCard
                   key={app.id}
                   application={app}
-                  onMove={onMoveApplication}
                 />
               ))
             )}
@@ -57,14 +56,12 @@ export function PipelineBoard({ stages, onMoveApplication }: PipelineBoardProps)
 
 function ApplicationCard({
   application,
-  onMove,
 }: {
   application: Application & {
     applicant?: Applicant;
     reviewCount: number;
     averageScore: number | null;
   };
-  onMove?: (applicationId: string, newStatus: ApplicationStatus) => void;
 }) {
   return (
     <Card className="cursor-pointer hover:shadow-md transition-shadow">

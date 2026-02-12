@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
 import { User, FileText, Home, LogOut } from "lucide-react";
 
 export default async function ApplicantLayout({
@@ -50,7 +49,7 @@ export default async function ApplicantLayout({
               <form
                 action={async () => {
                   "use server";
-                  await signOut({ redirectTo: "/auth/signin" });
+                  redirect("/api/auth/signout");
                 }}
               >
                 <Button variant="ghost" size="sm" type="submit">

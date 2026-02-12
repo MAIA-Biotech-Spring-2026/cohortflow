@@ -9,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
 
 const profileSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -31,7 +30,6 @@ const profileSchema = z.object({
 type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function ProfilePage() {
-  const router = useRouter();
   const [success, setSuccess] = useState(false);
 
   const { data: profile, isLoading } = trpc.applicant.getProfile.useQuery();

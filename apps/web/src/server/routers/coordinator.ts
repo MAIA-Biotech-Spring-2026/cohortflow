@@ -9,7 +9,7 @@ import {
   VOLUNTEER_RUBRIC,
   getReviewsByApplication,
 } from "@/lib/mock-data";
-import type { Program, Application, AuditLog, ApplicationStatus } from "@/types";
+import type { Program, AuditLog, ApplicationStatus } from "@/types";
 
 // In-memory storage
 let programs = [...DEMO_PROGRAMS];

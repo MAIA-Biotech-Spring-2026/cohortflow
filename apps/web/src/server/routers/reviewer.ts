@@ -13,7 +13,7 @@ import type { Review } from "@/types";
 let reviews = [...DEMO_REVIEWS];
 
 export const reviewerRouter = createTRPCRouter({
-  getAssignedApplications: reviewerProcedure.query(({ ctx }) => {
+  getAssignedApplications: reviewerProcedure.query(() => {
     // In a real app, this would filter by assignments
     // For demo, show all submitted applications
     return DEMO_APPLICATIONS.filter(

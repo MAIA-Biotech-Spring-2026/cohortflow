@@ -1,6 +1,5 @@
 import "server-only";
 
-import { headers } from "next/headers";
 import { cache } from "react";
 import { createTRPCContext } from "@/server/trpc";
 import { appRouter } from "@/server/routers/_app";

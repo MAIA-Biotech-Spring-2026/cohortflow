@@ -12,7 +12,7 @@ export default function ExportPage() {
   const [selectedProgram, setSelectedProgram] = useState(DEMO_PROGRAMS[0]?.id || "");
   const [isExporting, setIsExporting] = useState(false);
 
-  const { data: csvData, refetch } = trpc.coordinator.exportApplications.useQuery(
+  const { refetch } = trpc.coordinator.exportApplications.useQuery(
     { programId: selectedProgram },
     { enabled: false }
   );

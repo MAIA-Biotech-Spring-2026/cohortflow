@@ -43,15 +43,13 @@ export default async function ReviewerLayout({
               <form
                 action={async () => {
                   "use server";
-                  const { signOut } = await import("next-auth/react");
+                  redirect("/api/auth/signout");
                 }}
               >
-                <Link href="/auth/signin">
-                  <Button variant="ghost" size="sm">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Sign Out
-                  </Button>
-                </Link>
+                <Button variant="ghost" size="sm" type="submit">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
               </form>
             </div>
           </div>
