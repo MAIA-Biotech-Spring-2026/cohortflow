@@ -3,9 +3,7 @@
   "buildCommand": "pnpm build",
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install",
-  "name": "cohortflow",
   "framework": "nextjs",
-  "monorepoRoot": ".",
   "rootDirectory": "apps/web",
   "env": {
     "DATABASE_URL": {
