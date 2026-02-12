@@ -1,10 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "rootDirectory": "apps/web",
   "env": {
     "DATABASE_URL": {
       "description": "PostgreSQL connection string for Vercel Postgres",
