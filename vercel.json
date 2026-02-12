@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "name": "cohortflow",
+  "framework": "nextjs",
+  "monorepoRoot": ".",
+  "rootDirectory": "apps/web",
+  "env": {
+    "DATABASE_URL": {
+      "description": "PostgreSQL connection string for Vercel Postgres",
+      "required": true
+    },
+    "NEXTAUTH_SECRET": {
+      "description": "NextAuth secret key (generate with: openssl rand -base64 32)",
+      "required": true
+    },
+    "NEXTAUTH_URL": {
+      "description": "Application URL (e.g., https://cohortflow.vercel.app)",
+      "required": true
+    },
+    "BLOB_READ_WRITE_TOKEN": {
+      "description": "Vercel Blob storage token for file uploads",
+      "required": true
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/trpc/:path*",
+      "destination": "/api/trpc/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/dashboard",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/trpc/[trpc].ts": {
+      "memory": 512,
+      "maxDuration": 30
+    }
+  }
+}
