@@ -173,23 +173,3 @@ jobs:
             apps/web/.next
             packages/db/dist
           retention-days: 1
-
-  deploy:
-    name: Deploy to Vercel
-    needs: [type-check, lint, build]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    environment:
-      name: production
-      url: https://cohortflow.vercel.app
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to Vercel
-        uses: vercel/action@v5.0.0
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          production: true
