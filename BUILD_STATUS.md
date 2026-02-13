@@ -1,10 +1,12 @@
 # CohortFlow Build Status
 
-**Last Updated**: 2026-02-13 00:38 UTC
+**Last Updated**: 2026-02-13 00:52 UTC
 
 🎉 **PERFECT BUILD - ALL CI CHECKS PASSING!** ✨ **PRODUCTION-READY!**
 
-**Live Demo:** https://cohortflow-o0v83b6gi-calebs-projects-a6310ab2.vercel.app/auth/signin
+**Repository:** https://github.com/MAIA-Biotech-Spring-2026/cohortflow
+
+**Live Demo:** https://cohortflow.vercel.app/auth/signin
 
 **Demo Accounts:**
 - Coordinator: `coordinator@example.com` / `demo123`
@@ -20,9 +22,11 @@
 - ✅ **Build Process**: Fixed Client Component boundaries ("use client" directives)
 - ✅ **GitHub Actions**: Removed redundant Vercel deploy job
 - ✅ **All Checks Passing**: Lint ✓, Type-check ✓, Build ✓
+- ✅ **Repository Consolidation**: Single MAIA org repo, Vercel reconnected
+- ✅ **Clean Deployment URL**: https://cohortflow.vercel.app
 
-**Changes**: 20+ files modified across 6 commits
-**Latest Commit**: `852c7e0` - fix: remove redundant Vercel deploy job from CI workflow
+**Changes**: 22+ files modified across 8 commits
+**Latest Commit**: docs: update deployment URL to cohortflow.vercel.app
 
 ### Production-Ready Enhancements (Previous)
 - ✅ **Error Handling**: Comprehensive error boundaries for all routes

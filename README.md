@@ -11,7 +11,7 @@
 
 **MAIA Biotech Spring 2026 Team Project**
 
-🚀 **Live Demo:** [https://cohortflow-o0v83b6gi-calebs-projects-a6310ab2.vercel.app](https://cohortflow-o0v83b6gi-calebs-projects-a6310ab2.vercel.app/auth/signin)
+🚀 **Live Demo:** [https://cohortflow.vercel.app](https://cohortflow.vercel.app/auth/signin)
 
 ## Overview
 
