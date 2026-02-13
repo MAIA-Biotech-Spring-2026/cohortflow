@@ -1,3 +1,5 @@
+"use client";
+
 import { FileQuestion, Home } from "lucide-react";
 import Link from "next/link";
 
