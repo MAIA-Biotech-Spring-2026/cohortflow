@@ -5,13 +5,42 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/status-badge";
 import { Progress } from "@/components/ui/progress";
-import { FileText, User, Clock, CheckCircle } from "lucide-react";
+import { FileText, User, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function ApplicantDashboard() {
-  const { data: profile, isLoading: profileLoading } = trpc.applicant.getProfile.useQuery();
-  const { data: applications, isLoading: appsLoading } = trpc.applicant.getApplications.useQuery();
+  const {
+    data: profile,
+    isLoading: profileLoading,
+    isError: profileError,
+    error: profileErrorData,
+  } = trpc.applicant.getProfile.useQuery();
+
+  const {
+    data: applications,
+    isLoading: appsLoading,
+    isError: appsError,
+    error: appsErrorData,
+  } = trpc.applicant.getApplications.useQuery();
+
+  useEffect(() => {
+    if (profileError) {
+      toast.error("Failed to load profile", {
+        description: profileErrorData?.message || "Please try again later",
+      });
+    }
+  }, [profileError, profileErrorData]);
+
+  useEffect(() => {
+    if (appsError) {
+      toast.error("Failed to load applications", {
+        description: appsErrorData?.message || "Please try again later",
+      });
+    }
+  }, [appsError, appsErrorData]);
 
   if (profileLoading || appsLoading) {
     return (
@@ -19,6 +48,25 @@ export default function ApplicantDashboard() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (profileError || appsError) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center max-w-md">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+            <AlertCircle className="h-6 w-6 text-red-600" />
+          </div>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">
+            Unable to load dashboard
+          </h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            We encountered an error loading your data. Please try refreshing the page.
+          </p>
+          <Button onClick={() => window.location.reload()}>Refresh page</Button>
         </div>
       </div>
     );

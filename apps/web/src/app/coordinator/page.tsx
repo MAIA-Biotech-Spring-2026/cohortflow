@@ -2,10 +2,26 @@
 
 import { trpc } from "@/lib/trpc/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, FileText, CheckCircle, Clock, Folder, TrendingUp, FileSpreadsheet, ScrollText } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Users, FileText, CheckCircle, Clock, Folder, TrendingUp, FileSpreadsheet, ScrollText, AlertCircle } from "lucide-react";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function CoordinatorDashboard() {
-  const { data: stats, isLoading } = trpc.coordinator.getDashboardStats.useQuery();
+  const {
+    data: stats,
+    isLoading,
+    isError,
+    error: errorData,
+  } = trpc.coordinator.getDashboardStats.useQuery();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load dashboard statistics", {
+        description: errorData?.message || "Please try again later",
+      });
+    }
+  }, [isError, errorData]);
 
   if (isLoading) {
     return (
@@ -13,6 +29,25 @@ export default function CoordinatorDashboard() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center max-w-md">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+            <AlertCircle className="h-6 w-6 text-red-600" />
+          </div>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">
+            Unable to load dashboard
+          </h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            We encountered an error loading your dashboard data. Please try refreshing the page.
+          </p>
+          <Button onClick={() => window.location.reload()}>Refresh page</Button>
         </div>
       </div>
     );

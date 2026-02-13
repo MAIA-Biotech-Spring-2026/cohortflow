@@ -3,12 +3,41 @@
 import { trpc } from "@/lib/trpc/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Clock, FileText, TrendingUp } from "lucide-react";
+import { CheckCircle, Clock, FileText, TrendingUp, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function ReviewerDashboard() {
-  const { data: stats, isLoading: statsLoading } = trpc.reviewer.getReviewStats.useQuery();
-  const { data: applications, isLoading: appsLoading } = trpc.reviewer.getAssignedApplications.useQuery();
+  const {
+    data: stats,
+    isLoading: statsLoading,
+    isError: statsError,
+    error: statsErrorData,
+  } = trpc.reviewer.getReviewStats.useQuery();
+
+  const {
+    data: applications,
+    isLoading: appsLoading,
+    isError: appsError,
+    error: appsErrorData,
+  } = trpc.reviewer.getAssignedApplications.useQuery();
+
+  useEffect(() => {
+    if (statsError) {
+      toast.error("Failed to load review statistics", {
+        description: statsErrorData?.message || "Please try again later",
+      });
+    }
+  }, [statsError, statsErrorData]);
+
+  useEffect(() => {
+    if (appsError) {
+      toast.error("Failed to load assigned applications", {
+        description: appsErrorData?.message || "Please try again later",
+      });
+    }
+  }, [appsError, appsErrorData]);
 
   if (statsLoading || appsLoading) {
     return (
@@ -16,6 +45,25 @@ export default function ReviewerDashboard() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (statsError || appsError) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center max-w-md">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+            <AlertCircle className="h-6 w-6 text-red-600" />
+          </div>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">
+            Unable to load dashboard
+          </h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            We encountered an error loading your review data. Please try refreshing the page.
+          </p>
+          <Button onClick={() => window.location.reload()}>Refresh page</Button>
         </div>
       </div>
     );

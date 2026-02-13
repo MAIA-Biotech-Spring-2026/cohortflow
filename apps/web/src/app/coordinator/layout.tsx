@@ -3,7 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, Folder, Users, FileSpreadsheet, ScrollText, LogOut } from "lucide-react";
+import { SignOutButton } from "@/components/sign-out-button";
+import { LayoutDashboard, Folder, Users, FileSpreadsheet, ScrollText } from "lucide-react";
 
 export default async function CoordinatorLayout({
   children,
@@ -23,34 +24,34 @@ export default async function CoordinatorLayout({
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
               <h1 className="text-xl font-bold text-primary">CohortFlow</h1>
-              <nav className="flex gap-2">
+              <nav className="flex gap-2" aria-label="Main navigation">
                 <Link href="/coordinator">
-                  <Button variant="ghost" size="sm">
-                    <LayoutDashboard className="h-4 w-4 mr-2" />
+                  <Button variant="ghost" size="sm" aria-label="Go to coordinator dashboard">
+                    <LayoutDashboard className="h-4 w-4 mr-2" aria-hidden="true" />
                     Dashboard
                   </Button>
                 </Link>
                 <Link href="/coordinator/programs">
-                  <Button variant="ghost" size="sm">
-                    <Folder className="h-4 w-4 mr-2" />
+                  <Button variant="ghost" size="sm" aria-label="Manage programs">
+                    <Folder className="h-4 w-4 mr-2" aria-hidden="true" />
                     Programs
                   </Button>
                 </Link>
                 <Link href="/coordinator/pipeline">
-                  <Button variant="ghost" size="sm">
-                    <Users className="h-4 w-4 mr-2" />
+                  <Button variant="ghost" size="sm" aria-label="View application pipeline">
+                    <Users className="h-4 w-4 mr-2" aria-hidden="true" />
                     Pipeline
                   </Button>
                 </Link>
                 <Link href="/coordinator/export">
-                  <Button variant="ghost" size="sm">
-                    <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  <Button variant="ghost" size="sm" aria-label="Export application data">
+                    <FileSpreadsheet className="h-4 w-4 mr-2" aria-hidden="true" />
                     Export
                   </Button>
                 </Link>
                 <Link href="/coordinator/audit">
-                  <Button variant="ghost" size="sm">
-                    <ScrollText className="h-4 w-4 mr-2" />
+                  <Button variant="ghost" size="sm" aria-label="View audit log">
+                    <ScrollText className="h-4 w-4 mr-2" aria-hidden="true" />
                     Audit Log
                   </Button>
                 </Link>
@@ -58,12 +59,7 @@ export default async function CoordinatorLayout({
             </div>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">{session.user.name}</span>
-              <Link href="/auth/signin">
-                <Button variant="ghost" size="sm">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Sign Out
-                </Button>
-              </Link>
+              <SignOutButton />
             </div>
           </div>
         </div>
