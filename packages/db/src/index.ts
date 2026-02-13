@@ -1,4 +1,5 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
+import { eq } from 'drizzle-orm';
 import postgres from 'postgres';
 import * as schema from './schema';
 
@@ -259,7 +260,7 @@ export const utils = {
   touchApplication: async (applicationId: string) => {
     return db.update(schema.applications)
       .set({ updatedAt: new Date() })
-      .where((applications, { eq }) => eq(applications.id, applicationId));
+      .where(eq(schema.applications.id, applicationId));
   },
 };
 
