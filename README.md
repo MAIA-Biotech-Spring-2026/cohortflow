@@ -11,6 +11,8 @@
 
 **MAIA Biotech Spring 2026 Team Project**
 
+🚀 **Live Demo:** [https://cohortflow-o0v83b6gi-calebs-projects-a6310ab2.vercel.app](https://cohortflow-o0v83b6gi-calebs-projects-a6310ab2.vercel.app/auth/signin)
+
 ## Overview
 
 CohortFlow is a configurable intake pipeline designed for **university hospital volunteer, shadowing, and research programs** that run high-volume applicant funnels multiple times per year.
