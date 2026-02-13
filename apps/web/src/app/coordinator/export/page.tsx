@@ -149,7 +149,7 @@ export default function ExportPage() {
             <p className="font-medium">Privacy Notice:</p>
             <p className="text-muted-foreground">
               Exported data contains sensitive personal information. Please handle
-              according to your organization's data protection policies.
+              according to your organization&apos;s data protection policies.
             </p>
           </div>
         </CardContent>

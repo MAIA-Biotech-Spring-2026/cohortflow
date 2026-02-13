@@ -164,7 +164,7 @@ export default function ApplicantDashboard() {
               <div className="text-center py-6">
                 <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
                 <p className="text-sm text-muted-foreground mb-4">
-                  You haven't started any applications yet
+                  You haven&apos;t started any applications yet
                 </p>
                 <Link href="/applicant/applications">
                   <Button>Browse Programs</Button>
